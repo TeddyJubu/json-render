@@ -1,31 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback, type ReactNode } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ConfettiExplosion from "react-confetti-explosion";
-import {
-  Renderer,
-  StateProvider,
-  VisibilityProvider,
-  ActionProvider,
-  ValidationProvider,
-} from "@json-render/react";
-import type { Spec } from "@json-render/core";
-import { registry, actionHandlers, onConfetti } from "@/lib/render/registry";
+import { onConfetti } from "@/lib/render/registry";
+import { SpecRenderer } from "@/lib/render/renderer";
 import { examples } from "@/lib/examples";
-
-function SpecRenderer({ spec }: { spec: Spec }): ReactNode {
-  return (
-    <StateProvider initialState={spec.state ?? {}}>
-      <VisibilityProvider>
-        <ActionProvider handlers={actionHandlers}>
-          <ValidationProvider>
-            <Renderer spec={spec} registry={registry} />
-          </ValidationProvider>
-        </ActionProvider>
-      </VisibilityProvider>
-    </StateProvider>
-  );
-}
 
 export default function Page() {
   const [selectedIndex] = useState(0);
